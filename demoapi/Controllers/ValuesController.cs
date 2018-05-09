@@ -1,33 +1,58 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using  static System.Net.Http.HttpResponseMessage;
 
 namespace demoapi.Controllers
 {
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
-        // GET api/values
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
+        
+        [HttpGet("toUpper/{message}")]
+        public string convertToUpperCase(string message)
+        { 
+            String upper = message.ToUpper();
+            return "Upper Case Value: " + upper;
         }
 
-        // GET api/values/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
+         [HttpGet("toLower/{message}")]
+        public string convertToLowerCase(string message)
+        { 
+           String errorProne = null;
+
+            errorProne.ToUpper();
+
+            return "Lower Case Value: " + message.ToLower();
         }
 
-        // POST api/values
-        [HttpPost]
-        public void Post([FromBody]string value)
+        [HttpPost("register")]
+        public System.Net.Http.HttpResponseMessage register([FromBody]string name, [FromBody]String email)
         {
+            System.Net.Http.HttpResponseMessage response = new System.Net.Http.HttpResponseMessage();
+
+            response.StatusCode = HttpStatusCode.OK;
+            response.ReasonPhrase = "Acknowledged receipt of POST request for name: " + name + ", email: " + email;
+            return response;
         }
+
+
+        [HttpGet("slow")]
+        public String slowRequest(string value)
+        {
+            //Generate random sleeptime
+            Random waitTime = new Random();
+            int timeInMs = waitTime.Next(2, 15) * 100;
+            //Put the thread to sleep
+            System.Threading.Thread.Sleep(timeInMs);
+            return "API call took " + timeInMs + " milli seconds to execute";
+
+        }
+
+
 
         // PUT api/values/5
         [HttpPut("{id}")]
