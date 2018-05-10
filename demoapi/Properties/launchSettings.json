@@ -23,7 +23,7 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "http://arazeem-appinsights-demoapi.azurewebsites.net/values"
+      "applicationUrl": "http://arazeem-appinsights-demoapi.azurewebsites.net"
     }
   }
 }
