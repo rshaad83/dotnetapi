@@ -8,6 +8,16 @@ using  static System.Net.Http.HttpResponseMessage;
 
 namespace demoapi.Controllers
 {
+    [Route("/")]
+    public class DefaultController : Controller
+    {
+        [HttpGet("/")]
+        public string landing()
+        {
+            return "This is a Demo API app";
+        }
+    }
+
     [Route("api/[controller]")]
     public class ValuesController : Controller
     {
